@@ -1,5 +1,6 @@
 {
-  "name": "next-ts-tailwind",
+  "name": "profile-overflow",
+  "description": "Fun way to share some of your (already) public StackOverflow user data to the internet.",
   "version": "0.1.0",
   "private": true,
   "scripts": {
