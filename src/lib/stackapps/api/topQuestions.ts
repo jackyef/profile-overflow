@@ -35,7 +35,7 @@ export const getTopQuestions = async (userId: string): Promise<Result> => {
     } else {
       const errorJson = await response.json();
 
-      console.error(`[api/getTopQuestions] ${errorJson}`);
+      console.error(`[api/getTopQuestions] ${JSON.stringify(errorJson)}`);
       throw new Error('Received unsuccessful response from StackExchange API');
     }
   } catch (err) {

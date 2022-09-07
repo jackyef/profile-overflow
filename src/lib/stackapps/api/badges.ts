@@ -26,7 +26,7 @@ export const getBadges = async (userId: string): Promise<Badge[] | null> => {
     } else {
       const errorJson = await response.json();
 
-      console.error(`[api/getBadges] ${errorJson}`);
+      console.error(`[api/getBadges] ${JSON.stringify(errorJson)}`);
       throw new Error('Received unsuccessful response from StackExchange API');
     }
   } catch (err) {

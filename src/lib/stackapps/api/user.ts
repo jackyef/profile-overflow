@@ -27,7 +27,7 @@ export const getUser = async (
     } else {
       const errorJson = await response.json();
 
-      console.error(`[api/getUser] ${errorJson}`);
+      console.error(`[api/getUser] ${JSON.stringify(errorJson)}`);
       throw new Error('Received unsuccessful response from StackExchange API');
     }
   } catch (err) {

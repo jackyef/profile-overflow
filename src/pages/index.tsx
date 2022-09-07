@@ -1,9 +1,14 @@
 import clsx from 'clsx';
 import type { NextPage } from 'next';
 import { MetaTags } from '../components/MetaTags/MetaTags';
+import { UserSearchInput } from '../components/UserSearchInput/UserSearchInput';
 
 const Container: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div className={clsx('p-8', 'max-w-6xl', 'mx-auto')}>{children}</div>;
+  return (
+    <div className={clsx('py-8', 'px-4', 'max-w-6xl', 'mx-auto')}>
+      {children}
+    </div>
+  );
 };
 
 const Home: NextPage = () => {
@@ -12,8 +17,8 @@ const Home: NextPage = () => {
       <MetaTags />
       <div className={clsx('isolate', 'overflow-x-hidden')}>
         <Container>
-          <main className={clsx('xl:flex', 'justify-between', 'mb-16')}>
-            Hello world
+          <main>
+            <UserSearchInput />
           </main>
         </Container>
       </div>

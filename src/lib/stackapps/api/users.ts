@@ -7,6 +7,7 @@ const BASE_PARAMS = new URLSearchParams();
 
 BASE_PARAMS.append('order', 'desc');
 BASE_PARAMS.append('sort', 'reputation');
+BASE_PARAMS.append('pagesize', '10');
 BASE_PARAMS.append('site', 'stackoverflow');
 BASE_PARAMS.append('key', STACK_APP_KEY);
 
@@ -24,7 +25,7 @@ export const getUsers = async (inName: string): Promise<StackUserData[]> => {
     } else {
       const errorJson = await response.json();
 
-      console.error(`[api/getUser] ${errorJson}`);
+      console.error(`[api/getUser] ${JSON.stringify(errorJson)}`);
       throw new Error('Received unsuccessful response from StackExchange API');
     }
   } catch (err) {

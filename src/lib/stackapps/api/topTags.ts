@@ -24,7 +24,7 @@ export const getTopTags = async (userId: string): Promise<Tag[] | null> => {
     } else {
       const errorJson = await response.json();
 
-      console.error(`[api/getTopTags] ${errorJson}`);
+      console.error(`[api/getTopTags] ${JSON.stringify(errorJson)}`);
       throw new Error('Received unsuccessful response from StackExchange API');
     }
   } catch (err) {
