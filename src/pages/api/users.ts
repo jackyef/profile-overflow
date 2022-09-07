@@ -25,6 +25,8 @@ export default async function handler(
 
     const users = await getUsers(String(name));
 
+    // Cache for 2 days
+    res.setHeader('Cache-Control', 'public, max-age=518400');
     res.status(200).json({ users });
   } catch (err) {
     if (err instanceof Error) {

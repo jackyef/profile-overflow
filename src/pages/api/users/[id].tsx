@@ -30,6 +30,8 @@ export default async function handler(
       throw new Error(`No user found for id: ${id}`);
     }
 
+    // Cache for 2 days
+    res.setHeader('Cache-Control', 'public, max-age=518400');
     res.status(200).json({ user });
   } catch (err) {
     if (err instanceof Error) {
