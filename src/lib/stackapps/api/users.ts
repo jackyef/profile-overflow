@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import { STACK_APP_KEY } from '../index';
-import type { StackUserData, StackUsersResponse } from '../types';
+import type { StackUserData, StackResponse } from '../types';
 
 const BASE_URL = `https://api.stackexchange.com/2.3/users`;
 const BASE_PARAMS = new URLSearchParams();
@@ -18,7 +18,7 @@ export const getUsers = async (inName: string): Promise<StackUserData[]> => {
     const response = await fetch(`${BASE_URL}?${params.toString()}`);
 
     if (response.ok) {
-      const json = (await response.json()) as StackUsersResponse;
+      const json = (await response.json()) as StackResponse<StackUserData>;
 
       return json.items;
     } else {

@@ -1,9 +1,10 @@
-export interface StackUsersResponse {
-  items: StackUserData[];
+export interface StackResponse<T> {
+  items: T[];
   has_more: boolean;
   backoff: number;
   quota_max: number;
   quota_remaining: number;
+  total: number;
 }
 
 export interface StackUserData {
@@ -33,4 +34,48 @@ export interface BadgeCounts {
   bronze: number;
   silver: number;
   gold: number;
+}
+
+export interface Tag {
+  user_id: number;
+  answer_count: number;
+  answer_score: number;
+  question_count: number;
+  question_score: number;
+  tag_name: string;
+}
+
+export interface Badge {
+  badge_type: string;
+  award_count: number;
+  rank: string;
+  badge_id: number;
+  link: string;
+  name: string;
+}
+
+export interface Question {
+  tags: string[];
+  comment_count: number;
+  is_answered: boolean;
+  view_count: number;
+  up_vote_count: number;
+  answer_count: number;
+  score: number;
+  creation_date: number;
+  link: string;
+  title: string;
+}
+
+export interface Answer {
+  up_vote_count: number;
+  is_accepted: boolean;
+  score: number;
+  last_activity_date: number;
+  last_edit_date: number;
+  creation_date: number;
+  answer_id: number;
+  question_id: number;
+  body_markdown: string;
+  link: string;
 }

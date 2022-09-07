@@ -1,18 +1,15 @@
 import fetch from 'isomorphic-unfetch';
 import { STACK_APP_KEY } from '../index';
-import type { StackResponse, StackUserData } from '../types';
+import type { Tag, StackResponse } from '../types';
 
-const BASE_URL = `https://api.stackexchange.com/2.3/users/:id`;
+const BASE_URL = `https://api.stackexchange.com/2.3/users/:id/top-tags`;
 const BASE_PARAMS = new URLSearchParams();
 
-BASE_PARAMS.append('order', 'desc');
-BASE_PARAMS.append('sort', 'reputation');
+BASE_PARAMS.append('pagesize', '5');
 BASE_PARAMS.append('site', 'stackoverflow');
 BASE_PARAMS.append('key', STACK_APP_KEY);
 
-export const getUser = async (
-  userId: string,
-): Promise<StackUserData | null> => {
+export const getTopTags = async (userId: string): Promise<Tag[] | null> => {
   const params = new URLSearchParams(BASE_PARAMS.toString());
 
   try {
@@ -21,13 +18,13 @@ export const getUser = async (
     );
 
     if (response.ok) {
-      const json = (await response.json()) as StackResponse<StackUserData>;
+      const json = (await response.json()) as StackResponse<Tag>;
 
-      return json.items[0];
+      return json.items;
     } else {
       const errorJson = await response.json();
 
-      console.error(`[api/getUser] ${errorJson}`);
+      console.error(`[api/getTopTags] ${errorJson}`);
       throw new Error('Received unsuccessful response from StackExchange API');
     }
   } catch (err) {
