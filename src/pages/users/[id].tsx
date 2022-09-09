@@ -24,6 +24,8 @@ import { TopTags } from '../../components/UserProfilePage/TopTags/TopTags';
 import { RecentBadges } from '../../components/UserProfilePage/RecentBadges/RecentBadges';
 import { getBadges } from '../../lib/stackapps/api/badges';
 import { TopQnAs } from '../../components/UserProfilePage/TopQnAs/TopQnAs';
+import Link from 'next/link';
+import { TwitterShareButtonAnchor } from '../../components/TwitterShare/TwitterShareButtonAnchor';
 
 type Props = {
   userData: StackUserData;
@@ -40,8 +42,6 @@ const UserPage: NextPage<Props> = ({
   topQuestions,
   badges,
 }) => {
-  console.log({ userData, topQuestions, topAnswers, topTags });
-
   if (!userData) return null;
 
   return (
@@ -96,6 +96,21 @@ const UserPage: NextPage<Props> = ({
                 />
               </Box>
             </Grid>
+
+            <div
+              className={clsx(
+                'my-8 flex flex-col md:flex-row gap-8 justify-center items-center',
+              )}
+            >
+              <TwitterShareButtonAnchor
+                text={`Check out my ProfileOverflow! https://profile-overflow.vercel.app/users/${userData.user_id}`}
+              >
+                Share on Twitter
+              </TwitterShareButtonAnchor>
+              <Link href="/">
+                <a className="underline-offset-2 underline">Get your own!</a>
+              </Link>
+            </div>
           </main>
         </Container>
       </div>

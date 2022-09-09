@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { FormEventHandler } from 'react';
-import DotsHorizontalIcon from '@heroicons/react/solid/DotsHorizontalIcon';
+import DotsHorizontalIcon from '@heroicons/react/24/solid/EllipsisHorizontalIcon';
 
 type Props = {
   onSubmit: FormEventHandler;
