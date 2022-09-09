@@ -50,7 +50,9 @@ const UserPage: NextPage<Props> = ({
 
   return (
     <>
-      <MetaTags />
+      <MetaTags
+        title={`Check out ${userData.display_name} StackOverflow profile summary | ProfileOverflow`}
+      />
       <div className={clsx('isolate', 'overflow-x-hidden')}>
         <Container>
           <main className="py-8 md:py-24 flex flex-col w-full max-w-[700px] mx-auto gap-8">
