@@ -16,6 +16,7 @@ import {
   Tag,
 } from '../../lib/stackapps/types';
 import { Profile } from '../../components/UserProfilePage/Profile/Profile';
+import { Reputation } from '../../components/UserProfilePage/Reputation/Reputation';
 
 type Props = {
   userData: StackUserData;
@@ -48,7 +49,12 @@ const UserPage: NextPage<Props> = ({
               <Box gridArea="first">
                 <Profile userData={userData} />
               </Box>
-              <Box gridArea="second">Reputation</Box>
+              <Box gridArea="second">
+                <Reputation
+                  reputation={userData.reputation}
+                  reputationYearDelta={userData.reputation_change_year}
+                />
+              </Box>
               <Box gridArea="third">Badges</Box>
               <Box gridArea="fourth">Reputation change this year</Box>
               <Box gridArea="fifth">Top tags</Box>

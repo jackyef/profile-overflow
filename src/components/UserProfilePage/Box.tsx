@@ -26,6 +26,7 @@ export const Box = ({ children, gridArea }: PropsWithChildren<Props>) => {
         'rounded-2xl',
         'w-full',
         'h-full',
+        'overflow-hidden',
       )}
     >
       {children}
