@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouteLoader } from '../components/RouterLoader/RouterLoader';
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Head>
         </>
       )}
+      <RouteLoader />
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
       </QueryClientProvider>
