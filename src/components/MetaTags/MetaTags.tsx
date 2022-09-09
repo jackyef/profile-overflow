@@ -1,21 +1,21 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-const baseUrl = `https://id-wfa-companies.vercel.app`;
+const baseUrl = `https://profile-overflow.vercel.app`;
 const twitterHandle = `@jackyef__`;
 
 export const MetaTags = ({
-  title = 'Next TypeScript Taiwind starter',
-  description = 'Starter repo for Next.js with TS and Tailwind for personal use',
+  title = 'ProfileOverflow',
+  description = 'Fun way to share some of your (already) public StackOverflow user data to the internet.',
 }) => {
   const router = useRouter();
   const url = `${baseUrl}${router.asPath}`;
   const keywords = '';
   // Update this as needed
-  const ogImage = `${baseUrl}/android-chrome-512x512.png`;
+  const ogImage = `${baseUrl}/og.png`;
 
-  /* purple-500 */
-  const themeColor = '#a855f7';
+  /* orange-500 */
+  const themeColor = '#f97316';
 
   return (
     <Head>
@@ -42,21 +42,21 @@ export const MetaTags = ({
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/apple-touch-icon.png"
+        href="/favicons/apple-touch-icon.png"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicon-32x32.png"
+        href="/favicons/favicon-32x32.png"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/favicon-16x16.png"
+        href="/favicons/favicon-16x16.png"
       />
-      <link rel="manifest" href="/site.webmanifest" />
+      <link rel="manifest" href="/favicons/site.webmanifest" />
       <meta name="msapplication-TileColor" content={themeColor} />
       <meta name="theme-color" content={themeColor} />
     </Head>
