@@ -35,21 +35,10 @@ export default async function opengraph(
 ) {
   // Parse the title
   const { id } = req.query;
-  const baseURL = isDev ? 'http://localhost:3000' : req.headers.host;
+  const baseURL = isDev
+    ? 'http://localhost:3000'
+    : `https://${req.headers.host}`;
 
-  //Fake the nodejs version
-  console.error('req.headers.host', req.headers.host);
-  console.error('isDev', isDev);
-  console.error('process.env.AWS_REGION', process.env.AWS_REGION);
-  console.error(
-    '[original] process.env.AWS_EXECUTION_ENV',
-    process.env.AWS_EXECUTION_ENV,
-  );
-  process.env.AWS_EXECUTION_ENV = 'AWS_Lambda_nodejs14.x';
-  console.error(
-    '[faked] process.env.AWS_EXECUTION_ENV',
-    process.env.AWS_EXECUTION_ENV,
-  );
   // Open the browser with the right window size
   const options = await getOptions(isDev);
   const browser = await chromium.puppeteer.launch(options);
