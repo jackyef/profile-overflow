@@ -17,6 +17,8 @@ import {
 } from '../../lib/stackapps/types';
 import { Profile } from '../../components/UserProfilePage/Profile/Profile';
 import { Reputation } from '../../components/UserProfilePage/Reputation/Reputation';
+import { Stat } from '../../components/UserProfilePage/Profile/Stat';
+import { formatNumber } from '../../lib/number/formatNumber';
 
 type Props = {
   userData: StackUserData;
@@ -55,10 +57,26 @@ const UserPage: NextPage<Props> = ({
                   reputationYearDelta={userData.reputation_change_year}
                 />
               </Box>
-              <Box gridArea="third">Badges</Box>
-              <Box gridArea="fourth">Reputation change this year</Box>
+              <Box gridArea="third">Recent badges</Box>
+              <Box gridArea="fourth">
+                <div className="h-full flex items-center">
+                  <Stat
+                    value={formatNumber(userData.question_count)}
+                    label="Questions asked"
+                    size="4xl"
+                  />
+                </div>
+              </Box>
               <Box gridArea="fifth">Top tags</Box>
-              <Box gridArea="sixth">Total questions and answers</Box>
+              <Box gridArea="sixth">
+                <div className="h-full flex items-center">
+                  <Stat
+                    value={formatNumber(userData.answer_count)}
+                    label="Answers given"
+                    size="4xl"
+                  />
+                </div>
+              </Box>
               <Box gridArea="seventh">Top questions and answers</Box>
             </Grid>
           </main>

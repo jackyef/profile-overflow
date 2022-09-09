@@ -13,15 +13,17 @@ type Props = {
 export const GeneralInfo = ({ userData }: Props) => {
   return (
     <div className={clsx('flex', 'flex-col', 'gap-4', 'items-center')}>
-      <img
-        className={clsx('rounded-lg')}
-        width={80}
-        height={80}
-        src={userData.profile_image}
-        alt=""
-      />
-      <div className={clsx('flex', 'flex-col', 'gap-1', 'text-center')}>
-        <span className="font-bold">{userData.display_name}</span>
+      <div className={clsx('flex', 'gap-4', 'items-center', 'self-start')}>
+        <img
+          className={clsx('rounded-2xl')}
+          width={80}
+          height={80}
+          src={userData.profile_image}
+          alt=""
+        />
+        <span className="text-xl font-bold">{userData.display_name}</span>
+      </div>
+      <div className={clsx('flex', 'flex-col', 'gap-1', 'self-start')}>
         <span className="text-gray-700 text-sm">
           Member since{' '}
           <SkipSSR

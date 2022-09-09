@@ -16,7 +16,7 @@ export const StackOverflowLink = ({ link }: Props) => {
         'w-full',
         'text-sm',
         'text-center',
-        'border-2 border-orange-400 rounded-md',
+        'border-2 border-orange-400 rounded-xl',
         'text-orange-600',
         'focus:bg-orange-50',
         'hover:bg-orange-50',

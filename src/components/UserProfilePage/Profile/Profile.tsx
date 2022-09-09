@@ -3,6 +3,7 @@ import { StackUserData } from '../../../lib/stackapps/types';
 import { Stat } from './Stat';
 import { StackOverflowLink } from './StackOverflowLink';
 import { GeneralInfo } from './GeneralInfo';
+import { BadgeStats } from './BadgeStats';
 
 type Props = {
   userData: StackUserData;
@@ -24,9 +25,10 @@ export const Profile = ({ userData }: Props) => {
       )}
     >
       <GeneralInfo userData={userData} />
-      <div className={clsx('flex')}>
-        <Stat value={totalQuestions} label="Questions" />
-        <Stat value={totalAnswers} label="Answers" />
+      <div className={clsx('flex', 'gap-4')}>
+        <BadgeStats type="gold" count={userData.badge_counts.gold} />
+        <BadgeStats type="silver" count={userData.badge_counts.silver} />
+        <BadgeStats type="bronze" count={userData.badge_counts.bronze} />
       </div>
 
       <div className={clsx('flex')}>
