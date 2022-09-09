@@ -7,12 +7,13 @@ const twitterHandle = `@jackyef__`;
 export const MetaTags = ({
   title = 'ProfileOverflow',
   description = 'Fun way to share some of your (already) public StackOverflow user data to the internet.',
+  ogPath = 'og.png',
 }) => {
   const router = useRouter();
   const url = `${baseUrl}${router.asPath}`;
   const keywords = '';
   // Update this as needed
-  const ogImage = `${baseUrl}/og.png`;
+  const ogImage = `${baseUrl}/${ogPath}`;
 
   /* orange-500 */
   const themeColor = '#f97316';

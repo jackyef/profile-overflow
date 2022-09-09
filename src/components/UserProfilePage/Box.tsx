@@ -3,10 +3,15 @@ import { motion } from 'framer-motion';
 import { PropsWithChildren } from 'react';
 
 type Props = {
-  gridArea: string;
+  gridArea?: string;
+  className?: string;
 };
 
-export const Box = ({ children, gridArea }: PropsWithChildren<Props>) => {
+export const Box = ({
+  children,
+  gridArea = '',
+  className,
+}: PropsWithChildren<Props>) => {
   const getAspectRatio = () => {
     if (['first', 'fourth', 'sixth'].includes(gridArea)) {
       return '1 / 1';
@@ -127,6 +132,7 @@ export const Box = ({ children, gridArea }: PropsWithChildren<Props>) => {
         'w-full',
         'h-full',
         'overflow-hidden',
+        className,
       )}
       {...getAnimationDescriptors()}
     >

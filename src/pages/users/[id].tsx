@@ -52,6 +52,7 @@ const UserPage: NextPage<Props> = ({
     <>
       <MetaTags
         title={`Check out ${userData.display_name} StackOverflow profile summary | ProfileOverflow`}
+        ogPath={`api/og/users/${userData.user_id}`}
       />
       <div className={clsx('isolate', 'overflow-x-hidden')}>
         <Container>
