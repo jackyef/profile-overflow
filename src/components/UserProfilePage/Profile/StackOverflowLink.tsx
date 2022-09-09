@@ -20,6 +20,7 @@ export const StackOverflowLink = ({ link }: Props) => {
         'text-orange-600',
         'focus:bg-orange-50',
         'hover:bg-orange-50',
+        'focus:outline-none focus:ring-orange-300 focus:ring-4',
         'py-2 px-4',
       )}
       target="_blank"

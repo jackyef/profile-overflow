@@ -19,6 +19,7 @@ import { Profile } from '../../components/UserProfilePage/Profile/Profile';
 import { Reputation } from '../../components/UserProfilePage/Reputation/Reputation';
 import { Stat } from '../../components/UserProfilePage/Profile/Stat';
 import { formatNumber } from '../../lib/number/formatNumber';
+import { TopTags } from '../../components/UserProfilePage/TopTags/TopTags';
 
 type Props = {
   userData: StackUserData;
@@ -67,7 +68,9 @@ const UserPage: NextPage<Props> = ({
                   />
                 </div>
               </Box>
-              <Box gridArea="fifth">Top tags</Box>
+              <Box gridArea="fifth">
+                <TopTags tags={topTags} userId={userData.user_id} />
+              </Box>
               <Box gridArea="sixth">
                 <div className="h-full flex items-center">
                   <Stat
