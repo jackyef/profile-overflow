@@ -52,7 +52,7 @@ export interface Tag {
 export interface Badge {
   badge_type: string;
   award_count: number;
-  rank: string;
+  rank: 'bronze' | 'silver' | 'gold';
   badge_id: number;
   link: string;
   name: string;

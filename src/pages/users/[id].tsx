@@ -11,6 +11,7 @@ import { getTopTags } from '../../lib/stackapps/api/topTags';
 import { getUser } from '../../lib/stackapps/api/user';
 import {
   Answer,
+  Badge,
   Question,
   StackUserData,
   Tag,
@@ -20,12 +21,15 @@ import { Reputation } from '../../components/UserProfilePage/Reputation/Reputati
 import { Stat } from '../../components/UserProfilePage/Profile/Stat';
 import { formatNumber } from '../../lib/number/formatNumber';
 import { TopTags } from '../../components/UserProfilePage/TopTags/TopTags';
+import { RecentBadges } from '../../components/UserProfilePage/RecentBadges/RecentBadges';
+import { getBadges } from '../../lib/stackapps/api/badges';
 
 type Props = {
   userData: StackUserData;
   topTags: Tag[];
   topQuestions: Question[];
   topAnswers: Answer[];
+  badges: Badge[];
 };
 
 const UserPage: NextPage<Props> = ({
@@ -33,6 +37,7 @@ const UserPage: NextPage<Props> = ({
   topTags,
   topAnswers,
   topQuestions,
+  badges,
 }) => {
   console.log({ userData, topQuestions, topAnswers, topTags });
 
@@ -58,7 +63,9 @@ const UserPage: NextPage<Props> = ({
                   reputationYearDelta={userData.reputation_change_year}
                 />
               </Box>
-              <Box gridArea="third">Recent badges</Box>
+              <Box gridArea="third">
+                <RecentBadges badges={badges} userData={userData} />
+              </Box>
               <Box gridArea="fourth">
                 <div className="h-full flex items-center">
                   <Stat
@@ -103,18 +110,21 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   const userId = context?.params?.id?.toString() || '';
 
   if (Number(userId) > 0) {
-    const [userData, topQuestions, topTags, topAnswers] = await Promise.all([
-      getUser(userId),
-      getTopQuestions(userId),
-      getTopTags(userId),
-      getTopAnswers(userId),
-    ]);
+    const [userData, topQuestions, topTags, topAnswers, badges] =
+      await Promise.all([
+        getUser(userId),
+        getTopQuestions(userId),
+        getTopTags(userId),
+        getTopAnswers(userId),
+        getBadges(userId),
+      ]);
 
     const result = {
       userData,
       topQuestions: topQuestions.questions,
       topTags,
       topAnswers: topAnswers.answers,
+      badges: badges?.slice(0, 3),
     };
 
     return {
@@ -130,6 +140,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       topQuestions: [],
       topTags: [],
       topAnswers: [],
+      badges: [],
     },
     revalidate: 2 * 24 * 60 * 60, // revalidate at most every 2 days
   };

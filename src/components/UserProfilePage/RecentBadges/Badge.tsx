@@ -3,17 +3,18 @@ import clsx from 'clsx';
 type Props = {
   count: number;
   type: 'bronze' | 'silver' | 'gold';
+  name: string;
 };
 
-export const BadgeStats = ({ count, type }: Props) => {
+export const Badge = ({ count, type, name }: Props) => {
   return (
     <div
       className={clsx(
         'flex',
-        'flex-col',
         'flex-1',
+        'justify-between',
         'items-center',
-        'p-2',
+        'py-2 px-4',
         'rounded-2xl',
         'gap-1',
         {
@@ -33,8 +34,8 @@ export const BadgeStats = ({ count, type }: Props) => {
         },
       )}
     >
-      <span className="text-3xl font-bold">{count}</span>
-      <span className="text-xs capitalize">{type}s</span>
+      <span className="text-sm capitalize">{name}</span>
+      <span className="text-xs font-bold">&times;{count}</span>
     </div>
   );
 };

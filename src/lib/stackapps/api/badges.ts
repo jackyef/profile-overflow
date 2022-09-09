@@ -5,10 +5,10 @@ import type { StackResponse, Badge } from '../types';
 const BASE_URL = `https://api.stackexchange.com/2.3/users/:id/badges`;
 const BASE_PARAMS = new URLSearchParams();
 
-BASE_PARAMS.append('sort', 'rank');
+BASE_PARAMS.append('sort', 'awarded');
 BASE_PARAMS.append('order', 'desc');
 BASE_PARAMS.append('site', 'stackoverflow');
-BASE_PARAMS.append('filter', '!9YIY)bXY-'); // Omit user field
+BASE_PARAMS.append('filter', '!9QtdO*B2U'); // Omit user field
 BASE_PARAMS.append('key', STACK_APP_KEY);
 
 export const getBadges = async (userId: string): Promise<Badge[] | null> => {
