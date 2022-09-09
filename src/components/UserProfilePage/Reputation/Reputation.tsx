@@ -3,6 +3,7 @@ import ArrowLongDownIcon from '@heroicons/react/24/outline/ArrowLongDownIcon';
 import { formatReputation } from '../../../lib/number/formatReputation';
 import clsx from 'clsx';
 import { ReputationIcon } from '../../icons/ReputationIcon';
+import { BoxHeading } from '../BoxHeading';
 
 type Props = {
   reputation: number;
@@ -27,7 +28,7 @@ export const Reputation = ({ reputation, reputationYearDelta }: Props) => {
         width={160}
         height={160}
       />
-      <h2 className={clsx('text-gray-600', 'self-end')}>Reputation</h2>
+      <BoxHeading className="self-end">Reputation</BoxHeading>
       <div className={clsx('text-5xl', 'font-bold', 'self-end')}>
         {formatReputation(reputation)}
       </div>

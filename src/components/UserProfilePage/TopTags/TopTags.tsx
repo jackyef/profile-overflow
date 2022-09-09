@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { Tag } from '../../../lib/stackapps/types';
 
 import HashtagIcon from '@heroicons/react/24/solid/HashtagIcon';
+import { BoxHeading } from '../BoxHeading';
 
 type Props = {
   tags: Tag[];
@@ -33,7 +34,8 @@ export const TopTags = ({ tags, userId }: Props) => {
         width={160}
         height={160}
       />
-      <h2 className="text-gray-600">Most active in</h2>
+      <BoxHeading>Most active in</BoxHeading>
+
       <div className={clsx('flex gap-2 flex-wrap')}>
         {tags.map((tag) => (
           <a
