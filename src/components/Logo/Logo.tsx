@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 type Props = {
@@ -7,14 +8,15 @@ type Props = {
 
 export const Logo = ({ size = 'md' }: Props) => {
   return (
-    <Link href="/">
-      <a
+    <Link href="/" passHref>
+      <motion.a
+        layoutId="logo"
         aria-label="profile overflow logo"
         className={clsx('flex gap-1', `text-${size}`)}
       >
         <span>profile</span>
         <span className="font-bold">overflow</span>
-      </a>
+      </motion.a>
     </Link>
   );
 };

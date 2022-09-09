@@ -26,6 +26,7 @@ import { getBadges } from '../../lib/stackapps/api/badges';
 import { TopQnAs } from '../../components/UserProfilePage/TopQnAs/TopQnAs';
 import Link from 'next/link';
 import { TwitterShareButtonAnchor } from '../../components/TwitterShare/TwitterShareButtonAnchor';
+import { AnimatePresence, useReducedMotion } from 'framer-motion';
 
 type Props = {
   userData: StackUserData;
@@ -42,6 +43,9 @@ const UserPage: NextPage<Props> = ({
   topQuestions,
   badges,
 }) => {
+  const shouldReduceMotion = useReducedMotion();
+  const width = typeof window === 'undefined' ? 0 : window.innerWidth;
+
   if (!userData) return null;
 
   return (
@@ -54,48 +58,50 @@ const UserPage: NextPage<Props> = ({
               <Logo size="3xl" />
             </div>
 
-            <Grid>
-              <Box gridArea="first">
-                <Profile userData={userData} />
-              </Box>
-              <Box gridArea="second">
-                <Reputation
-                  reputation={userData.reputation}
-                  reputationYearDelta={userData.reputation_change_year}
-                />
-              </Box>
-              <Box gridArea="third">
-                <RecentBadges badges={badges} userData={userData} />
-              </Box>
-              <Box gridArea="fourth">
-                <div className="h-full flex items-center">
-                  <Stat
-                    value={formatNumber(userData.question_count)}
-                    label="Questions asked"
-                    size="4xl"
+            <AnimatePresence initial={!shouldReduceMotion && width > 720}>
+              <Grid>
+                <Box gridArea="first">
+                  <Profile userData={userData} />
+                </Box>
+                <Box gridArea="second">
+                  <Reputation
+                    reputation={userData.reputation}
+                    reputationYearDelta={userData.reputation_change_year}
                   />
-                </div>
-              </Box>
-              <Box gridArea="fifth">
-                <TopTags tags={topTags} userId={userData.user_id} />
-              </Box>
-              <Box gridArea="sixth">
-                <div className="h-full flex items-center">
-                  <Stat
-                    value={formatNumber(userData.answer_count)}
-                    label="Answers given"
-                    size="4xl"
+                </Box>
+                <Box gridArea="third">
+                  <RecentBadges badges={badges} userData={userData} />
+                </Box>
+                <Box gridArea="fourth">
+                  <div className="h-full flex items-center">
+                    <Stat
+                      value={formatNumber(userData.question_count)}
+                      label="Questions asked"
+                      size="4xl"
+                    />
+                  </div>
+                </Box>
+                <Box gridArea="fifth">
+                  <TopTags tags={topTags} userId={userData.user_id} />
+                </Box>
+                <Box gridArea="sixth">
+                  <div className="h-full flex items-center">
+                    <Stat
+                      value={formatNumber(userData.answer_count)}
+                      label="Answers given"
+                      size="4xl"
+                    />
+                  </div>
+                </Box>
+                <Box gridArea="seventh">
+                  <TopQnAs
+                    questions={topQuestions}
+                    answers={topAnswers}
+                    userData={userData}
                   />
-                </div>
-              </Box>
-              <Box gridArea="seventh">
-                <TopQnAs
-                  questions={topQuestions}
-                  answers={topAnswers}
-                  userData={userData}
-                />
-              </Box>
-            </Grid>
+                </Box>
+              </Grid>
+            </AnimatePresence>
 
             <div
               className={clsx(
@@ -131,39 +137,40 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext) {
   const userId = context?.params?.id?.toString() || '';
 
-  if (Number(userId) > 0) {
-    const [userData, topQuestions, topTags, topAnswers, badges] =
-      await Promise.all([
-        getUser(userId),
-        getTopQuestions(userId),
-        getTopTags(userId),
-        getTopAnswers(userId),
-        getBadges(userId),
-      ]);
+  try {
+    if (Number(userId) > 0) {
+      const [userData, topQuestions, topTags, topAnswers, badges] =
+        await Promise.all([
+          getUser(userId),
+          getTopQuestions(userId),
+          getTopTags(userId),
+          getTopAnswers(userId),
+          getBadges(userId),
+        ]);
 
-    const result = {
-      userData,
-      topQuestions: topQuestions.questions,
-      topTags,
-      topAnswers: topAnswers.answers,
-      badges: badges?.slice(0, 3),
-    };
+      const result = {
+        userData,
+        topQuestions: topQuestions.questions,
+        topTags,
+        topAnswers: topAnswers.answers,
+        badges: badges?.slice(0, 3),
+      };
 
+      return {
+        props: {
+          ...result,
+        },
+
+        revalidate: 2 * 24 * 60 * 60, // revalidate at most every 2 days
+      };
+    } else {
+      return {
+        notFound: true,
+      };
+    }
+  } catch (err) {
     return {
-      props: {
-        ...result,
-      },
+      notFound: true,
     };
   }
-
-  return {
-    props: {
-      userData: null,
-      topQuestions: [],
-      topTags: [],
-      topAnswers: [],
-      badges: [],
-    },
-    revalidate: 2 * 24 * 60 * 60, // revalidate at most every 2 days
-  };
 }

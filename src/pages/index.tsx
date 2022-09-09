@@ -11,10 +11,11 @@ const Home: NextPage = () => {
       <MetaTags />
       <div className={clsx('isolate', 'overflow-x-hidden')}>
         <Container>
-          <main className="py-24 flex flex-col w-full max-w-xl mx-auto gap-8">
+          <main className="py-24 md:py-48 flex flex-col w-full max-w-xl mx-auto gap-8">
             <div className="self-center">
               <Logo size="3xl" />
             </div>
+
             <UserSearchInput />
           </main>
         </Container>
