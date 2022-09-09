@@ -5,6 +5,7 @@ import type {
   StackUserData,
 } from '../../../lib/stackapps/types';
 import { BoxHeading } from '../BoxHeading';
+import { ViewAllAnchor } from '../ViewMoreAnchor';
 import { Badge } from './Badge';
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 
 export const RecentBadges = ({ badges, userData }: Props) => {
   return (
-    <div className={clsx('flex flex-col justify-between h-full')}>
+    <div className={clsx('flex flex-col gap-3 justify-between h-full')}>
       <div className={clsx('flex flex-col gap-4')}>
         <BoxHeading>Recent badges</BoxHeading>
         <div className={clsx('flex flex-col gap-3')}>
@@ -30,29 +31,9 @@ export const RecentBadges = ({ badges, userData }: Props) => {
           })}
         </div>
       </div>
-      <a
-        className={clsx(
-          'mt-1',
-          'flex',
-          'items-center',
-          'justify-center',
-          'gap-2',
-          'w-full',
-          'text-sm',
-          'text-center',
-          'rounded-lg',
-          'text-slate-600',
-          'focus:underline',
-          'hover:underline',
-          'focus:outline-none focus:ring-slate-300 focus:ring-4',
-        )}
-        target="_blank"
+      <ViewAllAnchor
         href={`https://stackoverflow.com/users/${userData.user_id}/${userData.display_name}?tab=badges`}
-        rel="noreferrer"
-      >
-        View all
-        <ArrowTopRightOnSquareIcon height={16} />
-      </a>
+      />
     </div>
   );
 };

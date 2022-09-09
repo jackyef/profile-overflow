@@ -23,6 +23,7 @@ import { formatNumber } from '../../lib/number/formatNumber';
 import { TopTags } from '../../components/UserProfilePage/TopTags/TopTags';
 import { RecentBadges } from '../../components/UserProfilePage/RecentBadges/RecentBadges';
 import { getBadges } from '../../lib/stackapps/api/badges';
+import { TopQnAs } from '../../components/UserProfilePage/TopQnAs/TopQnAs';
 
 type Props = {
   userData: StackUserData;
@@ -87,7 +88,13 @@ const UserPage: NextPage<Props> = ({
                   />
                 </div>
               </Box>
-              <Box gridArea="seventh">Top questions and answers</Box>
+              <Box gridArea="seventh">
+                <TopQnAs
+                  questions={topQuestions}
+                  answers={topAnswers}
+                  userData={userData}
+                />
+              </Box>
             </Grid>
           </main>
         </Container>
