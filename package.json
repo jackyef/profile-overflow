@@ -9,6 +9,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "^14"
+  },
   "dependencies": {
     "@heroicons/react": "^2.0.0",
     "@tanem/react-nprogress": "^5.0.12",
