@@ -33,17 +33,26 @@ export const Reputation = ({ reputation, reputationYearDelta }: Props) => {
         {formatReputation(reputation)}
       </div>
       <div
-        className={clsx('flex', 'items-center', 'self-end', 'text-sm', {
-          'text-emerald-600': isDeltaPositive,
-          'text-red-600': !isDeltaPositive,
-        })}
+        className={clsx(
+          'flex flex-col',
+          'items-center',
+          'self-end',
+          'text-sm',
+          {
+            'text-emerald-600': isDeltaPositive,
+            'text-red-600': !isDeltaPositive,
+          },
+        )}
       >
-        {isDeltaPositive ? (
-          <ArrowLongUpIcon height={24} width={24} strokeWidth={2} />
-        ) : (
-          <ArrowLongDownIcon height={24} width={24} strokeWidth={2} />
-        )}{' '}
-        {formatReputation(reputationYearDelta)} this year
+        <div className={clsx('flex', 'text-xl', 'items-center', 'font-bold')}>
+          {isDeltaPositive ? (
+            <ArrowLongUpIcon height={24} width={24} strokeWidth={2} />
+          ) : (
+            <ArrowLongDownIcon height={24} width={24} strokeWidth={2} />
+          )}{' '}
+          {formatReputation(reputationYearDelta)}
+          <div className="text-sm font-medium ml-1">this year</div>
+        </div>
       </div>
     </div>
   );
