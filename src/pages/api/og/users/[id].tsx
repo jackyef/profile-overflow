@@ -1,4 +1,5 @@
-import chromium from 'chrome-aws-lambda';
+// https://github.com/alixaxel/chrome-aws-lambda/pull/264
+import chromium from '@sparticuz/chrome-aws-lambda';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const isDev = !process.env.AWS_REGION;
