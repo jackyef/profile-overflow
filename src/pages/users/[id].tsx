@@ -3,12 +3,8 @@ import { GetStaticPropsContext, NextPage } from 'next';
 import { Container } from '../../components/Container/Container';
 import { Logo } from '../../components/Logo/Logo';
 import { MetaTags } from '../../components/MetaTags/MetaTags';
-import { SkipSSR } from '../../components/SkipSSR';
 import { Box } from '../../components/UserProfilePage/Box';
-import { Col } from '../../components/UserProfilePage/Col';
 import { Grid } from '../../components/UserProfilePage/Grid';
-import { Row } from '../../components/UserProfilePage/Row';
-import { format } from '../../lib/datetime/format';
 import { getTopAnswers } from '../../lib/stackapps/api/topAnswers';
 import { getTopQuestions } from '../../lib/stackapps/api/topQuestions';
 import { getTopTags } from '../../lib/stackapps/api/topTags';
@@ -19,6 +15,7 @@ import {
   StackUserData,
   Tag,
 } from '../../lib/stackapps/types';
+import { Profile } from '../../components/UserProfilePage/Profile/Profile';
 
 type Props = {
   userData: StackUserData;
@@ -35,6 +32,8 @@ const UserPage: NextPage<Props> = ({
 }) => {
   console.log({ userData, topQuestions, topAnswers, topTags });
 
+  if (!userData) return null;
+
   return (
     <>
       <MetaTags />
@@ -47,31 +46,7 @@ const UserPage: NextPage<Props> = ({
 
             <Grid>
               <Box gridArea="first">
-                <div className={clsx('flex', 'flex-col', 'gap-4')}>
-                  <div className={clsx('flex', 'gap-4', 'items-center')}>
-                    <img
-                      className={clsx('rounded-lg')}
-                      width={80}
-                      height={80}
-                      src={userData.profile_image}
-                      alt=""
-                    />
-                    <div className={clsx('flex', 'flex-col', 'gap-1')}>
-                      <span className="font-bold">{userData.display_name}</span>
-                      <span className="text-gray-700 text-sm">
-                        Member since{' '}
-                        <SkipSSR
-                          fallback={new Date(
-                            userData.creation_date * 1000,
-                          ).toDateString()}
-                        >
-                          {format(new Date(userData.creation_date * 1000))}
-                        </SkipSSR>
-                      </span>
-                    </div>
-                  </div>
-                  <div className={clsx('flex')}></div>
-                </div>
+                <Profile userData={userData} />
               </Box>
               <Box gridArea="second">Reputation</Box>
               <Box gridArea="third">Badges</Box>
@@ -93,7 +68,7 @@ export async function getStaticPaths() {
   return {
     paths: [],
     // statically render this path incrementally on runtime
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
@@ -110,9 +85,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
     const result = {
       userData,
-      topQuestions,
+      topQuestions: topQuestions.questions,
       topTags,
-      topAnswers,
+      topAnswers: topAnswers.answers,
     };
 
     return {

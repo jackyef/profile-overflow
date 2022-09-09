@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@heroicons/react': ^1.0.5
+  '@heroicons/react': ^2.0.0
   '@swc-node/register': ^1.4.2
   '@tanstack/react-query': ^4.2.3
   '@types/node': 17.0.12
@@ -25,7 +25,7 @@ specifiers:
   typescript: 4.6.3
 
 dependencies:
-  '@heroicons/react': 1.0.6_react@18.0.0
+  '@heroicons/react': 2.0.10_react@18.0.0
   '@tanstack/react-query': 4.2.3_zpnidt7m3osuk7shl3s4oenomq
   clsx: 1.1.1
   isomorphic-unfetch: 3.1.0
@@ -84,8 +84,8 @@ packages:
       - supports-color
     dev: true
 
-  /@heroicons/react/1.0.6_react@18.0.0:
-    resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
+  /@heroicons/react/2.0.10_react@18.0.0:
+    resolution: {integrity: sha512-Ufr+pgAElNiRCSklnHGOR10bXb02BLlosvbDK7sCRUMOcQ3R/HCXTfXs4BUkYZ4dKpx6l5dUD06VSW1dTpTEDw==}
     peerDependencies:
       react: '>= 16'
     dependencies:

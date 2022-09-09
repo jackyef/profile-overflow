@@ -28,6 +28,10 @@ export interface StackUserData {
   link: string;
   profile_image: string;
   display_name: string;
+  up_vote_count: number;
+  view_count: number;
+  question_count: number;
+  answer_count: number;
 }
 
 export interface BadgeCounts {

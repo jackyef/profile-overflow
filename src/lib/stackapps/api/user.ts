@@ -8,6 +8,7 @@ const BASE_PARAMS = new URLSearchParams();
 BASE_PARAMS.append('order', 'desc');
 BASE_PARAMS.append('sort', 'reputation');
 BASE_PARAMS.append('site', 'stackoverflow');
+BASE_PARAMS.append('filter', '!6VvPDzOWTA_(Z');
 BASE_PARAMS.append('key', STACK_APP_KEY);
 
 export const getUser = async (

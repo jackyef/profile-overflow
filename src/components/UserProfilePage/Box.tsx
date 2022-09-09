@@ -16,7 +16,6 @@ export const Box = ({ children, gridArea }: PropsWithChildren<Props>) => {
     <div
       style={{
         gridArea,
-        aspectRatio: getAspectRatio(),
       }}
       className={clsx(
         'p-4',
@@ -32,10 +31,15 @@ export const Box = ({ children, gridArea }: PropsWithChildren<Props>) => {
       {children}
 
       <style jsx>{`
+        div {
+          aspect-ratio: ${getAspectRatio()};
+        }
+
         @media (max-width: 740px) {
           div {
+            aspect-ratio: revert;
             width: 100%;
-            max-width: 320px;
+            max-width: 334px;
           }
         }
       `}</style>
