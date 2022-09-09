@@ -18,7 +18,11 @@ type Props = {
 export const TopQnAs = ({ questions, answers, userData }: Props) => {
   return (
     <div className={clsx('flex flex-col md:flex-row gap-8 h-full')}>
-      <div className={clsx('flex flex-1 flex-col justify-between h-full')}>
+      <div
+        className={clsx(
+          'flex flex-1 flex-col gap-4 justify-between h-full border-b pb-8 md:border-0 md:pb-0',
+        )}
+      >
         <div className={clsx('flex flex-col gap-4')}>
           <BoxHeading>Top questions</BoxHeading>
 
@@ -38,7 +42,9 @@ export const TopQnAs = ({ questions, answers, userData }: Props) => {
           href={`https://stackoverflow.com/users/${userData.user_id}/${userData.display_name}?tab=questions`}
         />
       </div>
-      <div className={clsx('flex flex-1 flex-col justify-between h-full')}>
+      <div
+        className={clsx('flex flex-1 flex-col gap-4 justify-between h-full')}
+      >
         <div className={clsx('flex flex-col gap-4')}>
           <BoxHeading>Top answers</BoxHeading>
 

@@ -49,7 +49,7 @@ const UserPage: NextPage<Props> = ({
       <MetaTags />
       <div className={clsx('isolate', 'overflow-x-hidden')}>
         <Container>
-          <main className="py-24 flex flex-col w-full max-w-[700px] mx-auto gap-8">
+          <main className="py-8 md:py-24 flex flex-col w-full max-w-[700px] mx-auto gap-8">
             <div className="self-center">
               <Logo size="3xl" />
             </div>

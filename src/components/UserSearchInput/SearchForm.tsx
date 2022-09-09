@@ -36,6 +36,7 @@ export const SearchForm = ({ onSubmit, isLoading = false }: Props) => {
         <input
           readOnly={isLoading}
           autoComplete="off"
+          autoFocus
           name="search"
           id="search"
           className={clsx(
@@ -45,10 +46,10 @@ export const SearchForm = ({ onSubmit, isLoading = false }: Props) => {
             'w-full',
             'text-sm',
             'text-gray-900',
-            'bg-gray-50',
+            'bg-slate-100',
+            'shadow-lg',
+            'shadow-slate-300',
             'rounded-lg',
-            'border',
-            'border-gray-300',
             'focus:ring-4',
             'focus:outline-none',
             'focus:ring-orange-300',
@@ -72,6 +73,8 @@ export const SearchForm = ({ onSubmit, isLoading = false }: Props) => {
             'font-medium',
             'rounded-lg',
             'text-sm',
+            'shadow-md',
+            'shadow-orange-300',
             'px-4',
             'py-2',
             'flex',
