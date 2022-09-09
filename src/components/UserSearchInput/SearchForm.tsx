@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 import { FormEventHandler } from 'react';
+import DotsHorizontalIcon from '@heroicons/react/solid/DotsHorizontalIcon';
 
 type Props = {
   onSubmit: FormEventHandler;
+  isLoading?: boolean;
 };
 
-export const SearchForm = ({ onSubmit }: Props) => {
+export const SearchForm = ({ onSubmit, isLoading = false }: Props) => {
   return (
     <form onSubmit={onSubmit}>
       <label
@@ -32,6 +34,7 @@ export const SearchForm = ({ onSubmit }: Props) => {
           </svg>
         </div>
         <input
+          readOnly={isLoading}
           autoComplete="off"
           name="search"
           id="search"
@@ -55,6 +58,7 @@ export const SearchForm = ({ onSubmit }: Props) => {
         />
         <button
           type="submit"
+          disabled={isLoading}
           className={clsx(
             'text-white',
             'absolute',
@@ -70,9 +74,19 @@ export const SearchForm = ({ onSubmit }: Props) => {
             'text-sm',
             'px-4',
             'py-2',
+            'flex',
+            'justify-center',
+            'min-w-[80px]',
+            {
+              'opacity-60': isLoading,
+            },
           )}
         >
-          Search
+          {isLoading ? (
+            <DotsHorizontalIcon height={16} className={'animate-pulse'} />
+          ) : (
+            'Search'
+          )}
         </button>
       </div>
     </form>

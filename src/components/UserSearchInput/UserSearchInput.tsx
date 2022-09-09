@@ -12,7 +12,7 @@ interface CustomHTMLSearchForm extends HTMLFormElement {
 
 export const UserSearchInput = () => {
   const [searchedName, setSearchedName] = useState('');
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     [`users[${searchedName}]`],
     () => fetchUsers(searchedName),
     {
@@ -69,7 +69,7 @@ export const UserSearchInput = () => {
   return (
     <>
       <div onKeyDown={handleKeyDown}>
-        <SearchForm onSubmit={handleSubmit} />
+        <SearchForm onSubmit={handleSubmit} isLoading={isLoading} />
 
         {data && data.length > 0 && (
           <SearchResultBox>
