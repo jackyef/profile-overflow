@@ -25,6 +25,7 @@ export const StackOverflowAuthButton = ({ isLoading = false }: Props) => {
     <a
       href={shouldBeDisabled ? '#' : `${BASE_URL}?${BASE_PARAMS.toString()}`}
       className={clsx(
+        'inline-block',
         'rounded-xl',
         'text-white bg-orange-500 px-4 py-2',
         'hover:bg-orange-300 focus:bg-orange-300',
