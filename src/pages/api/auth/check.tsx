@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { STACK_APP_COOKIE_NAME } from '../../../lib/stackapps';
 
 type ResponseData =
   | {
@@ -14,7 +15,7 @@ export default async function handler(
   res: NextApiResponse<ResponseData>,
 ) {
   try {
-    if (req.cookies.stackapp_access_token) {
+    if (req.cookies[STACK_APP_COOKIE_NAME]) {
       res.status(200).json({ isAuthenticated: true });
     } else {
       res.status(200).json({ isAuthenticated: false });

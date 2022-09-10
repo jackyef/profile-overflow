@@ -9,8 +9,15 @@ BASE_PARAMS.append('pagesize', '5');
 BASE_PARAMS.append('site', 'stackoverflow');
 BASE_PARAMS.append('key', STACK_APP_KEY);
 
-export const getTopTags = async (userId: string): Promise<Tag[] | null> => {
+export const getTopTags = async (
+  userId: string,
+  accessToken?: string,
+): Promise<Tag[] | null> => {
   const params = new URLSearchParams(BASE_PARAMS.toString());
+
+  if (accessToken) {
+    params.append('access_token', accessToken);
+  }
 
   try {
     const response = await fetch(

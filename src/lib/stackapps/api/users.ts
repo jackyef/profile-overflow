@@ -11,9 +11,16 @@ BASE_PARAMS.append('pagesize', '10');
 BASE_PARAMS.append('site', 'stackoverflow');
 BASE_PARAMS.append('key', STACK_APP_KEY);
 
-export const getUsers = async (inName: string): Promise<StackUserData[]> => {
+export const getUsers = async (
+  inName: string,
+  accessToken?: string,
+): Promise<StackUserData[]> => {
   const params = new URLSearchParams(BASE_PARAMS.toString());
   params.append('inname', inName);
+
+  if (accessToken) {
+    params.append('access_token', accessToken);
+  }
 
   try {
     const response = await fetch(`${BASE_URL}?${params.toString()}`);

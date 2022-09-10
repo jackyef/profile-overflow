@@ -17,8 +17,15 @@ type Result = {
   answers: Answer[];
   total: number;
 };
-export const getTopAnswers = async (userId: string): Promise<Result> => {
+export const getTopAnswers = async (
+  userId: string,
+  accessToken?: string,
+): Promise<Result> => {
   const params = new URLSearchParams(BASE_PARAMS.toString());
+
+  if (accessToken) {
+    params.append('access_token', accessToken);
+  }
 
   try {
     const response = await fetch(

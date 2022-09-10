@@ -11,8 +11,15 @@ BASE_PARAMS.append('site', 'stackoverflow');
 BASE_PARAMS.append('filter', '!9QtdO*B2U'); // Omit user field
 BASE_PARAMS.append('key', STACK_APP_KEY);
 
-export const getBadges = async (userId: string): Promise<Badge[] | null> => {
+export const getBadges = async (
+  userId: string,
+  accessToken?: string,
+): Promise<Badge[] | null> => {
   const params = new URLSearchParams(BASE_PARAMS.toString());
+
+  if (accessToken) {
+    params.append('access_token', accessToken);
+  }
 
   try {
     const response = await fetch(

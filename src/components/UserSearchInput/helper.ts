@@ -3,7 +3,9 @@ import { StackUserData } from '../../lib/stackapps/types';
 export const fetchUsers = async (inname: string) => {
   if (!inname) return [];
 
-  const response = await fetch(`/api/users?name=${inname}`);
+  const response = await fetch(`/api/users?name=${inname}`, {
+    credentials: 'include',
+  });
 
   if (!response.ok) {
     throw new Error();

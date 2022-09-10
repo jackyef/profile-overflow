@@ -13,8 +13,13 @@ BASE_PARAMS.append('key', STACK_APP_KEY);
 
 export const getQuestionById = async (
   questionId: string,
+  accessToken?: string,
 ): Promise<Question | null> => {
   const params = new URLSearchParams(BASE_PARAMS.toString());
+
+  if (accessToken) {
+    params.append('access_token', accessToken);
+  }
 
   try {
     const response = await fetch(

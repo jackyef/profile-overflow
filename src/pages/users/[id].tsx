@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { GetStaticPropsContext, NextPage } from 'next';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { Container } from '../../components/Container/Container';
 import { Logo } from '../../components/Logo/Logo';
 import { MetaTags } from '../../components/MetaTags/MetaTags';
@@ -27,6 +27,7 @@ import { TopQnAs } from '../../components/UserProfilePage/TopQnAs/TopQnAs';
 import Link from 'next/link';
 import { TwitterShareButtonAnchor } from '../../components/TwitterShare/TwitterShareButtonAnchor';
 import { AnimatePresence, useReducedMotion } from 'framer-motion';
+import { STACK_APP_COOKIE_NAME } from '../../lib/stackapps';
 
 type Props = {
   userData: StackUserData;
@@ -129,26 +130,19 @@ const UserPage: NextPage<Props> = ({
 
 export default UserPage;
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    // statically render this path incrementally on runtime
-    fallback: 'blocking',
-  };
-}
-
-export async function getStaticProps(context: GetStaticPropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const userId = context?.params?.id?.toString() || '';
+  const accessToken = context.req.cookies[STACK_APP_COOKIE_NAME];
 
   try {
     if (Number(userId) > 0) {
       const [userData, topQuestions, topTags, topAnswers, badges] =
         await Promise.all([
-          getUser(userId),
-          getTopQuestions(userId),
-          getTopTags(userId),
-          getTopAnswers(userId),
-          getBadges(userId),
+          getUser(userId, accessToken),
+          getTopQuestions(userId, accessToken),
+          getTopTags(userId, accessToken),
+          getTopAnswers(userId, accessToken),
+          getBadges(userId, accessToken),
         ]);
 
       const result = {
@@ -159,12 +153,15 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         badges: badges?.slice(0, 3),
       };
 
+      context.res.setHeader(
+        'Cache-Control',
+        `public, s-maxage=${2 * 24 * 60 * 60}`,
+      );
+
       return {
         props: {
           ...result,
         },
-
-        revalidate: 2 * 24 * 60 * 60, // revalidate at most every 2 days
       };
     } else {
       return {

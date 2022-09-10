@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
 export const fetchAuthStatus = async () => {
-  const response = await fetch(`/api/auth/check`);
+  const response = await fetch(`/api/auth/check`, {
+    credentials: 'include',
+  });
 
   if (!response.ok) {
     throw new Error();

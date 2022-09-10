@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { STACK_APP_COOKIE_NAME } from '../../lib/stackapps';
 import { getUsers } from '../../lib/stackapps/api/users';
 import type { StackUserData } from '../../lib/stackapps/types';
 
@@ -16,6 +17,7 @@ export default async function handler(
   res: NextApiResponse<ResponseData>,
 ) {
   const name = req.query.name;
+  const accessToken = req.cookies[STACK_APP_COOKIE_NAME];
 
   try {
     if (!name) {
@@ -23,7 +25,7 @@ export default async function handler(
       throw new Error('`name` must be provided');
     }
 
-    const users = await getUsers(String(name));
+    const users = await getUsers(String(name), accessToken);
 
     // Cache for 2 days
     res.setHeader('Cache-Control', 'public, max-age=518400');

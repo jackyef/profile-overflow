@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { STACK_APP_COOKIE_NAME } from '../../../lib/stackapps';
 
 type ResponseData =
   | {
@@ -20,7 +21,7 @@ export default async function handler(
     // Set cookie to be used in other requests
     res.setHeader(
       'Set-Cookie',
-      `stackapp_access_token=${accessToken}; SameSite=Strict; HttpOnly; Max-Age=${expires}`,
+      `${STACK_APP_COOKIE_NAME}=${accessToken}; SameSite=Strict; Path=/; HttpOnly; Max-Age=${expires}`,
     );
     res.status(200).json({ success: true });
   } catch (err) {

@@ -41,8 +41,8 @@ const Home: NextPage = () => {
 
               {isAuthenticated ? (
                 <p>
-                  You are currently logged in and enjoying extra API quota{' '}
-                  <span aria-hidden>🎉</span>
+                  You are currently logged in and benefitting from extra API
+                  quota <span aria-hidden>🎉</span>
                 </p>
               ) : (
                 <>

@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { STACK_APP_COOKIE_NAME } from '../../../../lib/stackapps';
 import { getTopQuestions } from '../../../../lib/stackapps/api/topQuestions';
 import type { Question } from '../../../../lib/stackapps/types';
 
@@ -17,6 +18,7 @@ export default async function handler(
   res: NextApiResponse<ResponseData>,
 ) {
   const id = req.query.id;
+  const accessToken = req.cookies[STACK_APP_COOKIE_NAME];
 
   try {
     if (!id) {
@@ -24,7 +26,7 @@ export default async function handler(
       throw new Error('`id` must be provided');
     }
 
-    const result = await getTopQuestions(String(id));
+    const result = await getTopQuestions(String(id), accessToken);
 
     // Cache for 2 days
     res.setHeader('Cache-Control', 'public, max-age=518400');
