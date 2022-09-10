@@ -36,7 +36,7 @@ const OAuthSuccessPage: NextPage = () => {
 
         router.push('/');
       } catch (err) {
-        if ('message' in err!) {
+        if ('message' in (err as Error)) {
           // @ts-expect-error
           setErrorMessage(err.message);
         }
