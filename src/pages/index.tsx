@@ -22,10 +22,26 @@ const Home: NextPage = () => {
 
             <UserSearchInput />
 
+            {isAuthenticated && (
+              <div
+                className={clsx(
+                  'text-center',
+                  'mx-8 mt-4 p-8 flex flex-col items-center',
+                  'bg-green-50 border border-green-500 text-green-700',
+                  'rounded-lg',
+                  'text-sm',
+                )}
+              >
+                <p>
+                  You are currently logged in and benefitting from extra API
+                  quota <span aria-hidden>🎉</span>
+                </p>
+              </div>
+            )}
             <div
               className={clsx(
                 'text-center',
-                'm-8 p-8 flex flex-col gap-8 items-center',
+                'mx-8 mt-4 p-8 flex flex-col gap-4 items-center',
                 'bg-amber-50 border border-amber-500 text-amber-700',
                 'rounded-lg',
                 'text-sm',
@@ -39,19 +55,16 @@ const Home: NextPage = () => {
                 data from the StackExchange APIs.
               </p>
 
-              {isAuthenticated ? (
-                <p>
-                  You are currently logged in and benefitting from extra API
-                  quota <span aria-hidden>🎉</span>
-                </p>
-              ) : (
+              {!isAuthenticated && (
                 <>
                   <p>
                     The API have limited quota, so sometimes you might see
                     missing data. You can log in with StackOverflow to get more
                     quota.
                   </p>
-                  <StackOverflowAuthButton isLoading={isAuthLoading} />
+                  <div className="mt-6">
+                    <StackOverflowAuthButton isLoading={isAuthLoading} />
+                  </div>
                 </>
               )}
             </div>
