@@ -10,8 +10,12 @@ type Props = {
 };
 
 export const Answer = ({ link, questionId, upvoteCount }: Props) => {
-  const { data } = useQuery([`question:${questionId}`], () =>
-    fetchQuestion(questionId),
+  const { data } = useQuery(
+    [`question:${questionId}`],
+    () => fetchQuestion(questionId),
+    {
+      staleTime: Infinity,
+    },
   );
 
   const questionTitle = data?.title || `Question #${questionId}`;
