@@ -3,6 +3,7 @@ import { Tag } from '../../../lib/stackapps/types';
 
 import HashtagIcon from '@heroicons/react/24/solid/HashtagIcon';
 import { BoxHeading } from '../BoxHeading';
+import { EmptyState } from '../EmptyState';
 
 type Props = {
   tags: Tag[];
@@ -56,6 +57,8 @@ export const TopTags = ({ tags, userId }: Props) => {
           </a>
         ))}
       </div>
+
+      {!tags?.length && <EmptyState>None</EmptyState>}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import type {
   StackUserData,
 } from '../../../lib/stackapps/types';
 import { BoxHeading } from '../BoxHeading';
+import { EmptyState } from '../EmptyState';
 import { ViewAllAnchor } from '../ViewMoreAnchor';
 import { Badge } from './Badge';
 
@@ -31,9 +32,13 @@ export const RecentBadges = ({ badges, userData }: Props) => {
           })}
         </div>
       </div>
-      <ViewAllAnchor
-        href={`https://stackoverflow.com/users/${userData.user_id}/${userData.display_name}?tab=badges`}
-      />
+
+      {!badges?.length && <EmptyState>No data available</EmptyState>}
+      {Boolean(badges?.length) && (
+        <ViewAllAnchor
+          href={`https://stackoverflow.com/users/${userData.user_id}/${userData.display_name}?tab=badges`}
+        />
+      )}
     </div>
   );
 };

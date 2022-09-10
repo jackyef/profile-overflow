@@ -10,11 +10,11 @@ type Props = {
 };
 
 export const Answer = ({ link, questionId, upvoteCount }: Props) => {
-  const { data, isLoading } = useQuery([`question:${questionId}`], () =>
+  const { data } = useQuery([`question:${questionId}`], () =>
     fetchQuestion(questionId),
   );
 
-  const questionTitle = data?.title || '';
+  const questionTitle = data?.title || `Question #${questionId}`;
 
   return (
     <div key={link} className={clsx('flex justify-between items-center gap-8')}>
