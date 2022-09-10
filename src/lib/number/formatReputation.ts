@@ -1,4 +1,8 @@
 export const formatReputation = (reputation: number): string => {
+  if (Math.abs(reputation) >= 1000000) {
+    return `${(reputation / 1000000).toFixed(1)}M`;
+  }
+
   if (Math.abs(reputation) >= 10000) {
     return `${(reputation / 1000).toFixed(1)}k`;
   }

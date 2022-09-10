@@ -12,6 +12,7 @@ export const Badge = ({ count, type, name }: Props) => {
       className={clsx(
         'flex',
         'flex-1',
+        'flex-wrap',
         'justify-between',
         'items-center',
         'py-2 px-4',

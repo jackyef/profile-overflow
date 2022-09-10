@@ -1,6 +1,7 @@
 import ArrowLongUpIcon from '@heroicons/react/24/outline/ArrowLongUpIcon';
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
+import { formatNumber } from '../../../lib/number/formatNumber';
 import { fetchQuestion } from './helper';
 
 type Props = {
@@ -38,7 +39,7 @@ export const Answer = ({ link, questionId, upvoteCount }: Props) => {
         )}
       >
         <ArrowLongUpIcon height={16} />
-        {upvoteCount}
+        {formatNumber(upvoteCount)}
       </div>
     </div>
   );
