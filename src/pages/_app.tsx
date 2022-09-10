@@ -5,7 +5,7 @@ import Script from 'next/script';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouteLoader } from '../components/RouterLoader/RouterLoader';
-import { AnimateSharedLayout } from 'framer-motion';
+import { LayoutGroup } from 'framer-motion';
 
 const queryClient = new QueryClient();
 
@@ -35,9 +35,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       )}
       <RouteLoader />
       <QueryClientProvider client={queryClient}>
-        <AnimateSharedLayout>
+        <LayoutGroup>
           <Component {...pageProps} />
-        </AnimateSharedLayout>
+        </LayoutGroup>
       </QueryClientProvider>
     </>
   );
