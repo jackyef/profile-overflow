@@ -1,14 +1,24 @@
-# Next.js + TypeScript + Tailwind
+![profile overflow logo](./public/og.png)
 
-Yet another personal starter repo, along with ESLint + Prettier set up.
+# ProfileOverflow
 
-TODOs:
-- Handle error state and empty state
-- OG image
-- animation with framer
+A simple app leveraging [StackExchange APIs](https://api.stackexchange.com/) to show some StackOverflow accounts information. Made for fun during a weekend as practice.
+
+This project is not affiliated with [StackOverflow](https://stackoverflow.com/) in any way.
+
+## Getting up and running
+
+```
+pnpm install
+pnpm run dev
+```
+
+If you are forking this, you should [register for your own StackApp](https://stackapps.com/apps/oauth/register) and update the values in [`./src/lib/stackapps/index.ts`](./src/lib/stackapps/index.ts) accordingly.
 
 ## Notes about OG image generation
-The OG image generation required chromium to be installed. On WSL2, use the following command to install it.
+
+The OG image generation requires chromium to be installed. On WSL2, use the following command to install it.
+
 ```
 # install packages
 sudo apt-get install -y curl unzip xvfb libxi6 libgconf-2-4 fonts-liberation
