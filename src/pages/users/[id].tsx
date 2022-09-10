@@ -55,7 +55,7 @@ const UserPage: NextPage<Props> = ({
       <MetaTags
         title={`${userData.display_name} has ${formatReputation(
           userData.reputation,
-        )} on StackOverflow | ProfileOverflow`}
+        )} reputations on StackOverflow | ProfileOverflow`}
         description={`${userData.question_count} questions asked, ${userData.answer_count} answers given, what else?`}
         ogPath={`api/og/users/${userData.user_id}`}
       />
