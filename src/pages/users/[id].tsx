@@ -28,6 +28,7 @@ import Link from 'next/link';
 import { TwitterShareButtonAnchor } from '../../components/TwitterShare/TwitterShareButtonAnchor';
 import { AnimatePresence, useReducedMotion } from 'framer-motion';
 import { STACK_APP_COOKIE_NAME } from '../../lib/stackapps';
+import { formatReputation } from '../../lib/number/formatReputation';
 
 type Props = {
   userData: StackUserData;
@@ -52,7 +53,10 @@ const UserPage: NextPage<Props> = ({
   return (
     <>
       <MetaTags
-        title={`Check out ${userData.display_name} StackOverflow profile summary | ProfileOverflow`}
+        title={`${userData.display_name} has ${formatReputation(
+          userData.reputation,
+        )} on StackOverflow | ProfileOverflow`}
+        description={`${userData.question_count} questions asked, ${userData.answer_count} answers given, what else?`}
         ogPath={`api/og/users/${userData.user_id}`}
       />
       <div className={clsx('isolate', 'overflow-x-hidden')}>
